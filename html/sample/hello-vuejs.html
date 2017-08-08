@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja-jp" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Vue.js-sample</title>
+    <meta name="description" content="Vue.js-sample" />
+    <meta name="author" content="hainet" />
+
+    <!-- develop -->
+    <script src="../../js/vue/vue.js"></script>
+    <!-- production -->
+    <!-- <script src="../js/vue.min.js"></script> -->
+    <!-- CDN -->
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+  </head>
+
+  <body>
+    <h1>Hello Vue!</h1>
+
+    <h2>message</h2>
+    <div id="message">
+      {{ message }}
+    </div>
+    <div>> message.message = 'something'</div>
+
+    <h2>messages</h2>
+    <ul id="messages">
+      <li>{{ message1 }}</li>
+      <li>{{ message2 }}</li>
+    </ul>
+    <div>> messages.message1 = 'something1'</div>
+    <div>> messages.message2 = 'something2'</div>
+
+    <h2>v-bind</h2>
+    <div id="v-bind">
+      <span v-bind:title="title">
+        Hover your mouse over me!
+      </span>
+    </div>
+    <div>> vBind.title = new Date()</div>
+
+    <h2>v-if</h2>
+    <div id="v-if">
+      <span v-if="seen">Now you see me!</span>
+    </div>
+    <div>> vIf.seen = false</div>
+
+    <h2>v-for</h2>
+    <div id="v-for">
+      <ol>
+        <li v-for="skill in skills">
+          {{ skill.name }}
+        </li>
+      </ol>
+    </div>
+    <div>> vFor.skills.push({ name: 'MVVM' })</div>
+    <div>> vFor.skills.pop()</div>
+
+    <h2>v-on</h2>
+    <div id="v-on">
+      <span>{{ message }}</span>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <div>> vOn.message = 'qwert'</div>
+
+    <h2>v-model</h2>
+    <div id="v-model">
+      <span>{{ value }}</span>
+      <input v-model="value" />
+    </div>
+    <div>> vModel.value = 'Edited!'</div>
+
+    <h2>component</h2>
+    <div id="component">
+      <component></component>
+    </div>
+
+    <h2>bound-component</h2>
+    <div id="bound-component">
+      <ol>
+        <bound-component v-for="skill in skills" v-bind:item="skill"></bound-component>
+      </ol>
+    </div>
+    <div>> boundComponent.skills.push({ name: 'MVVM' })</div>
+    <div>> boundComponent.skills.pop()</div>
+  </body>
+
+  <script src="../../js/sample/hello-vuejs.js"></script>
+</html>
