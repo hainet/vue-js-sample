@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Reactive property</title>
+    <meta name="description" content="Vue.js-sample" />
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Reactive property</h1>
+
+    <div id="reactive-property">
+      <div>{{ value }}</div>
+    </div>
+    <P>
+      > data.value // -> message<br />
+      > vm.value // -> message<br />
+      <br />
+      > data.value = 'updated'<br />
+      > data.value // -> updated<br />
+      > vm.value // -> updated<br />
+      <br />
+      > vm.value = 'updated'<br />
+      > data.value // -> updated<br />
+      > vm.value // -> updated<br />
+      <br/>
+      > data = { value: 'updated' } // -> Out of Vue instance<br />
+      > data.value // -> updated<br />
+      > vm.value // -> message
+    </P>
+
+    <script>
+      var data = { value: 'message' }
+
+      var vm = new Vue({
+          el: '#reactive-property',
+          data: data
+      })
+    </script>
+  </body>
+</html>
