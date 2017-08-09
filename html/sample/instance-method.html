@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Instance method</title>
+    <meta name="description" content="Vue.js-sample" />
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Instance method</h1>
+
+    <div id="instance-method">
+      <div>{{ value }}</div>
+    </div>
+
+    <h2>$data</h2>
+    <p>
+      > vm.$data<br />
+      > data<br />
+      > vm.$data === data // -> true
+    </p>
+
+    <h2>$el</h2>
+    <p>
+      > vm.$el<br />
+      > document.getElementById('instance-method')<br />
+      > vm.$el === document.getElementById('instance-method') // -> true
+    </p>
+
+    <h2>$watch</h2>
+    <p>
+      > data.value = 'updated'
+    </p>
+
+    <script>
+      var data = { value: 'message' }
+
+      var vm = new Vue({
+          el: '#instance-method',
+          data: data
+      })
+
+      vm.$watch('value', function (newVal, oldVal) {
+          console.log('newVal: ' + newVal)
+          console.log('oldVal: ' + oldVal)
+      })
+    </script>
+  </body>
+</html>
