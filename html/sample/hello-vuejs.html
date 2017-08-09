@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ja-jp" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="ja-jp" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-model="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
 
@@ -18,33 +19,53 @@
   <body>
     <h1>Hello Vue!</h1>
 
-    <h2>message</h2>
-    <div id="message">
+    <h2>value</h2>
+    <div id="value">
       {{ message }}
     </div>
-    <div>> message.message = 'something'</div>
+    <p>
+      > value.message = 'updated'
+    </p>
 
-    <h2>messages</h2>
-    <ul id="messages">
+    <h2>values</h2>
+    <ul id="values">
       <li>{{ message1 }}</li>
       <li>{{ message2 }}</li>
     </ul>
-    <div>> messages.message1 = 'something1'</div>
-    <div>> messages.message2 = 'something2'</div>
+    <p>
+      > values.message1 = 'updated1'<br />
+      > values.message2 = 'updated2'
+    </p>
+
+    <h2>object value</h2>
+    <div id="object-value">
+      <div>object: {{ object }}</div>
+      <div>object.message: {{ object.message }}</div>
+    </div>
+    <p>
+      > objectValue.object.message = 'updated'<br />
+      > objectValue.object = { message: 'updated' }<br />
+      > objectValue.object = { dummy: 'updated' }<br />
+      > objectValue.object = { dummy: 'updated', message: 'updated' }
+    </p>
 
     <h2>v-bind</h2>
     <div id="v-bind">
-      <span v-bind:title="title">
+      <span v-bind:title="message">
         Hover your mouse over me!
       </span>
     </div>
-    <div>> vBind.title = new Date()</div>
+    <p>
+      > vBind.message = new Date()
+    </p>
 
     <h2>v-if</h2>
     <div id="v-if">
       <span v-if="seen">Now you see me!</span>
     </div>
-    <div>> vIf.seen = false</div>
+    <p>
+      > vIf.seen = false
+    </p>
 
     <h2>v-for</h2>
     <div id="v-for">
@@ -54,36 +75,48 @@
         </li>
       </ol>
     </div>
-    <div>> vFor.skills.push({ name: 'MVVM' })</div>
-    <div>> vFor.skills.pop()</div>
+    <p>
+      > vFor.skills.push({ name: 'MVVM' })<br />
+      > vFor.skills.pop()
+    </p>
 
     <h2>v-on</h2>
     <div id="v-on">
       <span>{{ message }}</span>
       <button v-on:click="reverseMessage">Reverse Message</button>
     </div>
-    <div>> vOn.message = 'qwert'</div>
+    <p>
+      > vOn.message = 'updated'
+    </p>
 
     <h2>v-model</h2>
     <div id="v-model">
-      <span>{{ value }}</span>
-      <input v-model="value" />
+      <span>{{ message }}</span>
+      <input v-model:value="message" />
     </div>
-    <div>> vModel.value = 'Edited!'</div>
+    <p>> vModel.message = 'updated'</p>
 
     <h2>component</h2>
     <div id="component">
       <component></component>
     </div>
 
-    <h2>bound-component</h2>
-    <div id="bound-component">
-      <ol>
-        <bound-component v-for="skill in skills" v-bind:item="skill"></bound-component>
-      </ol>
+    <h2>v-bind-component</h2>
+    <div id="v-bind-component">
+      <v-bind-component v-bind:item="'Bound message'"></v-bind-component>
     </div>
-    <div>> boundComponent.skills.push({ name: 'MVVM' })</div>
-    <div>> boundComponent.skills.pop()</div>
+
+    <h2>vuejs-v-bind-component</h2>
+    <div id="vuejs-v-bind-component">
+      <v-bind-component v-bind:item="message"></v-bind-component>
+    </div>
+    <p>> vuejsVBindComponent.message = 'updated'</p>
+
+    <h2>nested component </h2>
+    <div id="nested-component">
+      <nested-component v-bind:item="message"></nested-component>
+    </div>
+    <p>> nestedComponent.message = 'updated'</p>
   </body>
 
   <script src="../../js/sample/hello-vuejs.js"></script>

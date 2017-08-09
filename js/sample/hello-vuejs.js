@@ -1,22 +1,29 @@
-var message = new Vue({
-    el: '#message',
+var value = new Vue({
+    el: '#value',
     data: {
         message: 'Hello Vue!'
     }
 })
 
-var messages = new Vue({
-    el: '#messages',
+var values = new Vue({
+    el: '#values',
     data: {
         message1: 'message1',
         message2: 'message2'
     }
 })
 
+var objectValue = new Vue({
+    el: '#object-value',
+    data: {
+        object: { message: 'message' }
+    }
+})
+
 var vBind = new Vue({
     el: '#v-bind',
     data: {
-        title: new Date()
+        message: new Date()
     }
 })
 
@@ -52,29 +59,42 @@ var vOn = new Vue({
 var vModel = new Vue({
     el: '#v-model',
     data: {
-        value: 'Edit me!'
+        message: 'Edit me!'
     }
 })
 
 Vue.component('component', {
-    template: '<div>template</div>'
+    template: '<span>template</span>'
 })
 
 var component = new Vue({
     el: '#component'
 })
 
-Vue.component('bound-component', {
+Vue.component('v-bind-component', {
     props: ['item'],
-    template: '<li>{{ item.value }}</li>'
+    template: '<span>{{ item }}</span>'
 })
 
-var boundComponent = new Vue({
-    el: '#bound-component',
+var vBindComponent = new Vue({
+    el: '#v-bind-component'
+})
+
+var vuejsVBindComponent = new Vue({
+    el: '#vuejs-v-bind-component',
     data: {
-        skills: [
-            { value: 'Javascript' },
-            { value: 'Vue.js' }
-        ]
+        message: 'Bound message'
+    }
+})
+
+Vue.component('nested-component', {
+    props: ['item'],
+    template: '<span><v-bind-component v-bind:item="item"></v-bind-component> in nested component</span>'
+})
+
+var nestedComponent = new Vue({
+    el: '#nested-component',
+    data: {
+        message: 'v-bind-component'
     }
 })
