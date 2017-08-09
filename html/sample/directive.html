@@ -13,26 +13,63 @@
   <body>
     <h1>Directive</h1>
 
-    <h2>v-bind</h2>
-    <div id="v-bind">
+    <div id="v-bind-id">
+      <h2>v-bind:id</h2>
+      <span v-bind:id="id">
+        Change my id!
+      </span>
+    </div>
+    <p>
+      > vBindId.id = '2'<br />
+      > document.getElementById('2')
+    </p>
+
+    <div id="v-bind-title">
+      <h2>v-bind:title</h2>
       <span v-bind:title="message">
         Hover your mouse over me!
       </span>
     </div>
     <p>
-      > vBind.message = new Date()
+      > vBindTitle.message = new Date()
     </p>
 
-    <h2>v-if</h2>
+    <div id="v-bind-href">
+      <h2>v-bind:href</h2>
+      <a v-bind:href="url" target="_blank">Vue.js</a>
+    </div>
+    <p>
+      > vBindHref.url = 'https://github.com/vuejs/vue'
+    </p>
+
+    <div id="v-bind-disabled">
+      <h2>v-bind:disabled</h2>
+      <input v-bind:disabled="disabled" />
+    </div>
+    <p>
+      > vBindDisabled.disabled = true
+    </p>
+
+    <div id="v-once">
+      <h2>v-once</h2>
+      <span v-once>
+        This {{ message }} will never change!
+      </span>
+    </div>
+    <p>
+      > vOnce.message = 'update'
+    </p>
+
     <div id="v-if">
+      <h2>v-if</h2>
       <span v-if="seen">Now you see me!</span>
     </div>
     <p>
       > vIf.seen = false
     </p>
 
-    <h2>v-for</h2>
     <div id="v-for">
+      <h2>v-for</h2>
       <ol>
         <li v-for="skill in skills">
           {{ skill.name }}
@@ -44,21 +81,26 @@
       > vFor.skills.pop()
     </p>
 
-    <h2>v-on</h2>
     <div id="v-on">
-      <span>{{ message }}</span>
-      <button v-on:click="reverseMessage">Reverse Message</button>
+      <h2>v-on</h2>
+      {{ message }}
+      <button v-on:click.prevent="reverseMessage">Reverse Message</button>
     </div>
     <p>
       > vOn.message = 'updated'
     </p>
 
-    <h2>v-model</h2>
     <div id="v-model">
-      <span>{{ message }}</span>
+      <h2>v-model</h2>
+      {{ message }}
       <input v-model:value="message" />
     </div>
     <p>> vModel.message = 'updated'</p>
+
+    <div id="v-html">
+      <h2>v-html</h2>
+      <span v-html="rawHtml"></span>
+    </div>
 
     <script src="../../js/sample/directive.js"></script>
   </body>
