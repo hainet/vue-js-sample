@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-model="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Directive</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Directive</h1>
+
+    <h2>v-bind</h2>
+    <div id="v-bind">
+      <span v-bind:title="message">
+        Hover your mouse over me!
+      </span>
+    </div>
+    <p>
+      > vBind.message = new Date()
+    </p>
+
+    <h2>v-if</h2>
+    <div id="v-if">
+      <span v-if="seen">Now you see me!</span>
+    </div>
+    <p>
+      > vIf.seen = false
+    </p>
+
+    <h2>v-for</h2>
+    <div id="v-for">
+      <ol>
+        <li v-for="skill in skills">
+          {{ skill.name }}
+        </li>
+      </ol>
+    </div>
+    <p>
+      > vFor.skills.push({ name: 'MVVM' })<br />
+      > vFor.skills.pop()
+    </p>
+
+    <h2>v-on</h2>
+    <div id="v-on">
+      <span>{{ message }}</span>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <p>
+      > vOn.message = 'updated'
+    </p>
+
+    <h2>v-model</h2>
+    <div id="v-model">
+      <span>{{ message }}</span>
+      <input v-model:value="message" />
+    </div>
+    <p>> vModel.message = 'updated'</p>
+
+    <script src="../../js/sample/directive.js"></script>
+  </body>
+</html>

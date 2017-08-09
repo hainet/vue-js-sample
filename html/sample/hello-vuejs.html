@@ -48,53 +48,6 @@
       > objectValue.object = { dummy: 'updated', message: 'updated' }
     </p>
 
-    <h2>v-bind</h2>
-    <div id="v-bind">
-      <span v-bind:title="message">
-        Hover your mouse over me!
-      </span>
-    </div>
-    <p>
-      > vBind.message = new Date()
-    </p>
-
-    <h2>v-if</h2>
-    <div id="v-if">
-      <span v-if="seen">Now you see me!</span>
-    </div>
-    <p>
-      > vIf.seen = false
-    </p>
-
-    <h2>v-for</h2>
-    <div id="v-for">
-      <ol>
-        <li v-for="skill in skills">
-          {{ skill.name }}
-        </li>
-      </ol>
-    </div>
-    <p>
-      > vFor.skills.push({ name: 'MVVM' })<br />
-      > vFor.skills.pop()
-    </p>
-
-    <h2>v-on</h2>
-    <div id="v-on">
-      <span>{{ message }}</span>
-      <button v-on:click="reverseMessage">Reverse Message</button>
-    </div>
-    <p>
-      > vOn.message = 'updated'
-    </p>
-
-    <h2>v-model</h2>
-    <div id="v-model">
-      <span>{{ message }}</span>
-      <input v-model:value="message" />
-    </div>
-    <p>> vModel.message = 'updated'</p>
-
     <h2>component</h2>
     <div id="component">
       <component></component>
