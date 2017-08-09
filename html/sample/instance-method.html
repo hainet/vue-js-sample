@@ -44,10 +44,17 @@
           data: data
       })
 
-      vm.$watch('value', function (newVal, oldVal) {
-          console.log('newVal: ' + newVal)
-          console.log('oldVal: ' + oldVal)
-      })
+      vm.$watch(
+          'value',
+          function (newVal, oldVal) {
+              console.log('newVal: ' + newVal)
+              console.log('oldVal: ' + oldVal)
+          },
+          {
+              immediate: false,
+              deep: false
+          }
+      )
     </script>
   </body>
 </html>
