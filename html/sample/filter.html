@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Filter</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Filter</h1>
+
+    <h2>mustache</h2>
+    <div id="mustache">
+      {{ message | capitalize }}
+    </div>
+    <p>
+      > mustache.message = 'updated'
+    </p>
+
+    <h2>v-bind</h2>
+    <div id="v-bind">
+      <span v-bind:title="message | capitalize">
+        Hover your mouse over me!
+      </span>
+    </div>
+    <p>
+      > vBind.message = 'updated'
+    </p>
+
+    <script>
+      var mustache = new Vue({
+          el: '#mustache',
+          data: { message: 'musatche' },
+          filters: {
+              capitalize: function (value) {
+                  if (!value) return ''
+                  return value.toUpperCase()
+              }
+          }
+      })
+
+      var vBind = new Vue({
+          el: '#v-bind',
+          data: { message: 'v-bind'},
+          filters: {
+              capitalize: function (value) {
+                  if (!value) return ''
+                  return value.toUpperCase()
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
