@@ -30,6 +30,16 @@
       > vBind.message = 'updated'
     </p>
 
+    <h2>filter chain</h2>
+    <div id="filter-chain">
+      {{ message }}<br />
+      {{ message | filterA }}<br />
+      {{ message | filterA | filterB }}
+    </div>
+    <p>
+      > filterChain.message = 'updated'
+    </p>
+
     <script>
       var mustache = new Vue({
           el: '#mustache',
@@ -49,6 +59,21 @@
               capitalize: function (value) {
                   if (!value) return ''
                   return value.toUpperCase()
+              }
+          }
+      })
+
+      var filterChain = new Vue({
+          el: '#filter-chain',
+          data: { message: 'filter-chain'},
+          filters: {
+              filterA: function (value) {
+                  if (!value) return ''
+                  return value.slice(0, 1).toUpperCase() + value.slice(1);
+              },
+              filterB: function (value) {
+                  if (!value) return ''
+                  return value.slice(0, -1) + value.slice(-1).toUpperCase()
               }
           }
       })
