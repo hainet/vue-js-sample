@@ -29,7 +29,11 @@
       <br/>
       > data = { value: 'updated' } // -> Out of Vue instance<br />
       > data.value // -> updated<br />
-      > vm.value // -> message
+      > vm.value // -> message<br />
+      <br />
+      > vm._data = { value: 'updated' } // -> Out of Vue instance<br />
+      > data.value // -> message<br />
+      > vm.value // -> updated
     </p>
 
     <script>
