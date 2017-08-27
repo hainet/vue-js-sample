@@ -20,16 +20,6 @@
       > mustache.message = 'updated'
     </p>
 
-    <h2>v-bind</h2>
-    <div id="v-bind">
-      <span v-bind:title="message | capitalize">
-        Hover your mouse over me!
-      </span>
-    </div>
-    <p>
-      > vBind.message = 'updated'
-    </p>
-
     <h2>filter chain</h2>
     <div id="filter-chain">
       {{ message }}<br />
@@ -44,17 +34,6 @@
       var mustache = new Vue({
           el: '#mustache',
           data: { message: 'musatche' },
-          filters: {
-              capitalize: function (value) {
-                  if (!value) return ''
-                  return value.toUpperCase()
-              }
-          }
-      })
-
-      var vBind = new Vue({
-          el: '#v-bind',
-          data: { message: 'v-bind'},
           filters: {
               capitalize: function (value) {
                   if (!value) return ''
