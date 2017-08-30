@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Style Binding</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Style Binding</h1>
+
+    <h2>Inline style</h2>
+    <div id="inline-style" class="static" v-bind:style="{ color: color }">
+      Inline style
+    </div>
+    <p>
+      > inlineStyleVm.color = 'blue'
+    </p>
+
+    <h2>Class style</h2>
+    <div id="class-style" v-bind:style="classStyle">
+      Class style
+    </div>
+    <p>
+      > classStyleVm.classStyle.color = 'blue'
+    </p>
+
+    <h2>Computed style</h2>
+    <div id="computed-style" v-bind:style="computedStyle">
+      Computed style
+    </div>
+    <p>
+      > computedStyleVm.color = 'blue'
+    </p>
+
+    <h2>Style array</h2>
+    <div id="style-array" v-bind:style="[someStyle, styles]">
+      Style array
+    </div>
+    <p>
+      // Confirm values<br />
+      > styleArrayVm.someStyle.color<br />
+      > styleArrayVm.styles['text-decoration']<br />
+      > styleArrayVm.styles['font-weight']<br />
+      <br />
+      // Clear values<br />
+      > styleArrayVm.someStyle = {}<br />
+      > styleArrayVm.styles = {}<br />
+      <br />
+      // Construct values<br />
+      > styleArrayVm.someStyle = { color: 'red' }<br />
+      > styleArrayVm.styles = { 'text-decoration': 'underline', 'font-weight': 'bold' }
+    </p>
+
+    <script>
+      var inlineStyleVm = new Vue({
+          el: '#inline-style',
+          data: {
+              color: 'red'
+          }
+      })
+
+      var classStyleVm = new Vue({
+          el: '#class-style',
+          data: {
+              classStyle: {
+                  color: 'red'
+              }
+          }
+      })
+
+      var computedStyleVm = new Vue({
+          el: '#computed-style',
+          data: {
+              color: 'red'
+          },
+          computed: {
+              computedStyle: function () {
+                  return {
+                      color: this.color
+                  }
+              }
+          }
+      })
+
+      var styleArrayVm = new Vue({
+          el: '#style-array',
+          data: {
+              someStyle: { color: 'red' },
+              styles: {
+                  'text-decoration': 'underline',
+                  'font-weight': 'bold'
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
