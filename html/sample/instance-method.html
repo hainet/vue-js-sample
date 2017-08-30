@@ -13,7 +13,7 @@
     <h1>Instance method</h1>
 
     <div id="instance-method">
-      <div>{{ value }}</div>
+      <div>{{ message }}</div>
     </div>
 
     <h2>$data</h2>
@@ -29,31 +29,13 @@
       > document.getElementById('instance-method')<br />
       > vm.$el === document.getElementById('instance-method') // -> true
     </p>
-
-    <h2>$watch</h2>
-    <p>
-      > data.value = 'updated'
-    </p>
-
     <script>
-      var data = { value: 'message' }
+      var data = { message: 'message' }
 
       var vm = new Vue({
           el: '#instance-method',
           data: data
       })
-
-      vm.$watch(
-          'value',
-          function (newVal, oldVal) {
-              console.log('newVal: ' + newVal)
-              console.log('oldVal: ' + oldVal)
-          },
-          {
-              immediate: false,
-              deep: false
-          }
-      )
     </script>
   </body>
 </html>
