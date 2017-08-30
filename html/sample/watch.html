@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Watch</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Watch</h1>
+
+    <div id="watch">
+      {{ message }}
+    </div>
+    <p>
+      > vm.message = 'updated'
+    </p>
+
+    <script>
+      var vm = new Vue({
+          el: '#watch',
+          data: { message: 'message' },
+          watch: {
+              message: function (newMessage, oldMessage) {
+                  console.log(`oldMessage: ${oldMessage}`)
+                  console.log(`newMessage: ${newMessage}`)
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
