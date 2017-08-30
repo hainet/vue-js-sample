@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Class Binding</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+
+    <style type="text/css">
+      .active {
+        text-decoration: underline;
+      }
+      .text-danger {
+        color: red;
+      }
+      .important {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Class Binding</h1>
+
+    <h2>Inline object</h2>
+    <div id="inline-object" class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+      Inline object
+    </div>
+    <p>
+      > inlineObjectVm.isActive = false<br />
+      > inlineObjectVm.hasError = true
+    </p>
+
+    <h2>Class object</h2>
+    <div id="class-object" v-bind:class="classObject">
+      Class Object
+    </div>
+    <p>
+      > classObjectVm.classObject.active = false<br />
+      > classObjectVm.classObject['text-danger'] = true
+    </p>
+
+    <h2>Computed object</h2>
+    <div id="computed-object" v-bind:class="computedObject">
+      Computed object
+    </div>
+    <p>
+      > computedObjectVm.isActive = false<br />
+      > computedObjectVm.hasError = true
+    </p>
+
+    <h2>Class array</h2>
+    <div id="class-array" v-bind:class="[someClass, classes]">
+      Class array
+    </div>
+    <p>
+      > classArrayVm.someClass<br />
+      > classArrayVm.classes<br />
+      > classArrayVm.someClass = ''<br />
+      > classArrayVm.classes = ''<br />
+      > classArrayVm.someClass = 'active'<br />
+      > classArrayVm.classes = 'active text-danger important' // -> class="active active text-danger important"
+    </p>
+
+    <script>
+      var inlineObjectVm = new Vue({
+          el: '#inline-object',
+          data: {
+              isActive: true,
+              hasError: false
+          }
+      })
+
+      var classObjectVm = new Vue({
+          el: '#class-object',
+          data: {
+              classObject: {
+                  active: true,
+                  'text-danger': false
+              }
+          }
+      })
+
+      var computedObjectVm = new Vue({
+          el: '#computed-object',
+          data: {
+              isActive: true,
+              hasError: false
+          },
+          computed: {
+              computedObject: function () {
+                  return {
+                      active: this.isActive,
+                      'text-danger': this.hasError
+                  }
+              }
+          }
+      })
+
+      var classArrayVm = new Vue({
+          el: '#class-array',
+          data: {
+              someClass: 'active',
+              classes: 'text-danger important'
+          }
+      })
+    </script>
+  </body>
+</html>
