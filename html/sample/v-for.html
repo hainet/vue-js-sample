@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>v-for</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>v-for</h1>
+
+    <h2>v-for</h2>
+    <ul id="v-for">
+      <li v-for="item in items">
+        {{ item.message }}
+      </li>
+    </ul>
+    <p>
+      > vForVm.items.pop()<br />
+      > vForVm.items.push({ message: 'baz' })
+    </p>
+
+    <h2>index</h2>
+    <ul id="index">
+      <li v-for="(item, index) in items">
+        index: {{ index }}, message: {{ item.message }}
+      </li>
+    </ul>
+    <p>
+      > indexVm.items.pop()<br />
+      > indexVm.items.push({ message: 'baz' })
+    </p>
+
+    <h2>template</h2>
+    <ul id="template">
+      <template v-for="item in items">
+        <li>This is divider</li>
+        <li>{{ item.message }}</li>
+      </template>
+    </ul>
+    <p>
+      > templateVm.items.pop()
+      > templateVm.items.push({ message: 'Baz'} )
+    </p>
+
+    <h2>object</h2>
+    <ul id="object">
+      <li v-for="(value, key, index) in object">
+        index: {{ index }}, key: {{ key }}, value: {{ value }}
+      </li>
+    </ul>
+    <p>
+      > objectVm.object.name = 'updated'
+    </p>
+
+    <h2>range</h2>
+    <div id="range">
+      <span v-for="n in range">{{ n }} </span>
+    </div>
+    <p>
+      > rangeVm.range = 10
+    </p>
+
+    <script>
+      var vForVm = new Vue({
+          el: '#v-for',
+          data: {
+              items: [
+                  { message: 'Foo' },
+                  { message: 'Bar' }
+              ]
+          }
+      })
+
+      var indexVm = new Vue({
+          el: '#index',
+          data: {
+              items: [
+                  { message: 'Foo' },
+                  { message: 'Bar' }
+              ]
+          }
+      })
+
+      var templateVm = new Vue({
+          el: '#template',
+          data: {
+              items: [
+                  { message: 'Foo'},
+                  { message: 'Bar'}
+              ]
+          }
+      })
+
+      var objectVm = new Vue({
+          el: '#object',
+          data: {
+              object: {
+                  name: 'hainet',
+                  age: 24
+              }
+          }
+      })
+
+      var rangeVm = new Vue({
+          el: '#range',
+          data: {
+              range: 15
+          }
+      })
+    </script>
+  </body>
+</html>
