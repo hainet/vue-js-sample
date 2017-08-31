@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>v-if</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>v-if</h1>
+
+    <h2>v-if</h2>
+    <div id="v-if" v-if="seen">
+      Now you see me!
+    </div>
+    <p>
+      > vIfVm.seen = false
+    </p>
+
+    <h2>v-else</h2>
+    <div id="v-else">
+      <div v-if="seen">
+        Now you see me!
+      </div>
+      <div v-else>
+        Nou you can't see her!
+      </div>
+    </div>
+    <p>
+      > vElseVm.seen = false
+    </p>
+
+    <h2>v-else-if</h2>
+    <div id="v-else-if">
+      <div v-if="type === 'A'">
+        Now you see A!
+      </div>
+      <div v-else-if="type === 'B'">
+        Now you see B!
+      </div>
+      <div v-else-if="type === 'C'">
+        Now you see C!
+      </div>
+      <div v-else>
+        Are you okay?
+      </div>
+    </div>
+    <p>
+      > vElseIfVm.type = 'A'<br />
+      > vElseIfVm.type = 'B'<br />
+      > vElseIfVm.type = 'C'<br />
+      > vElseIfVm.type = 'D'
+    </p>
+
+    <h2>template</h2>
+    <div id="template">
+      <template v-if="seen">
+        <h3>Title</h3>
+        <p>paragraph</p>
+      </template>
+    </div>
+
+    <h2>key</h2>
+    <div id="key">
+      <template v-if="type === 'Japanese'">
+        <input placeholder="姓" />
+        <input placeholder="名" key="japanese-first-name" />
+      </template>
+      <template v-else>
+        <input placeholder="Last name" />
+        <input placeholder="First name" key="english-first-name" />
+      </template>
+    </div>
+    <p>
+      > enter your name<br />
+      > keyVm.type = 'English'
+    </p>
+
+    <h2>v-show</h2>
+    <div id="v-show" v-show="seen">
+      It's a show time!
+    </div>
+    <p>
+      > vShowVm.seen = false
+    </p>
+
+    <script>
+      var vIfVm = new Vue({
+          el: '#v-if',
+          data: {
+              seen: true
+          }
+      })
+
+      var vElseVm = new Vue({
+          el: '#v-else',
+          data: {
+              seen: true
+          }
+      })
+
+      var vElseIfVm = new Vue({
+          el: '#v-else-if',
+          data: {
+              type: 'A'
+          }
+      })
+
+      var templateVm = new Vue({
+          el: '#template',
+          data: {
+              seen: true
+          }
+      })
+
+      var keyVm = new Vue({
+          el: '#key',
+          data: {
+              type: 'Japanese'
+          }
+      })
+
+      var vShowVm = new Vue({
+          el: '#v-show',
+          data: {
+              seen: true
+          }
+      })
+    </script>
+  </body>
+</html>
