@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>v-model</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>v-model</h1>
+
+    <h2>v-model</h2>
+    <div id="v-model">
+      <input v-model="message" placeholder="Edit me!" />
+      <p>Message is: {{ message }}</p>
+    </div>
+    <p>
+      > vModelVm.message = 'updated'
+    </p>
+
+    <h2>textarea</h2>
+    <div id="textarea">
+      <textarea v-model="message" placeholder="Edit me!"></textarea>
+      <p>
+        Message is:<br />
+        <span style="white-space: pre-line">{{ message }}</span>
+      </p>
+    </div>
+    <p>
+      > textareaVm.message = 'updated\nupdated'
+    </p>
+
+    <h2>checkbox</h2>
+    <div id="checkbox">
+      <input v-model="checked" type="checkbox" />
+      <span>{{ checked }}</span>
+    </div>
+    <p>
+      > checkboxVm.checked = true
+    </p>
+
+    <h2>Multiple checkbox</h2>
+    <div id="multiple-checkbox">
+      <input value="hainet" v-model="checkedNames" type="checkbox" />
+      <span>hainet</span>
+      <input value="Vue.js" v-model="checkedNames" type="checkbox" />
+      <span>Vue.js</span>
+      <input value="JavaScript" v-model="checkedNames" type="checkbox" />
+      <span>JavaScript</span>
+      <input v-model="checkedNames" type="checkbox" />
+      <span>No value</span>
+      <br />
+      Checked names: {{ checkedNames }}
+    </div>
+    <p>
+      > multipleCheckboxVm.checkedNames = [ 'hainet', 'Vue.js', 'JavaScript' ]<br />
+      > multipleCheckboxVm.checkedNames = [ 'null' ]
+    </p>
+
+    <h2>radio</h2>
+    <div id="radio">
+      <input name="radio" value="one" v-model="picked" type="radio" />
+      <span>one</span>
+      <input name="radio" value="two" v-model="picked" type="radio" />
+      <span>two</span>
+      <br />
+      <span>You picked: {{ picked }}</span>
+    </div>
+    <p>
+      > radioVm.picked = 'two'<br />
+      > radioVm.picked = 'three'
+    </p>
+
+    <h2>select</h2>
+    <div id="select">
+      <select v-model="selected">
+        <option disabled value="">Please select one</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <p>You selected: {{ selected }}</p>
+    </div>
+    <p>
+      > selectVm.selected = 'C'<br />
+      > selectVm.selected = 'D'<br />
+      > selectVm.selected = ''
+    </p>
+
+    <h2>select multiple</h2>
+    <div id="select-multiple">
+      <select v-model="selected" multiple>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <p>You selected: {{ selected }}</p>
+    </div>
+    <p>
+      > selectMultipleVm.selected = [ 'A', 'B', 'C' ]<br />
+      > selectMultipleVm.selected = [ 'D' ]
+    </p>
+
+    <h2>select v-for</h2>
+    <div id="select-v-for">
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
+      <p>You selected: {{ selected }}</p>
+    </div>
+    <p>
+      > selectVForVm.selected = 'C'<br />
+      > selectVForVm.options = [ { text: 'hoge', value: 'A' }, { text: 'fuga', value: 'B' }, { text: 'piyo', value: 'C' } ]
+    </p>
+
+    <h2>checkbox v-bind</h2>
+    <div id="checkbox-v-bind">
+      <input v-model="toggle" v-bind:true-value="a" v-bind:false-value="b" type="checkbox" />
+      <span>{{ toggle }}</span>
+    </div>
+    <p>
+      > checkboxVBindVm.toggle = 'A'<br />
+      > checkboxVBindVm.toggle === checkboxVBindVm.a<br />
+      > checkboxVBindVm.toggle === checkboxVBindVm.b
+    </p>
+
+    <h2>radio v-bind</h2>
+    <div id="radio-v-bind">
+      <input v-model="picked" v-bind:value="a" type="radio" />
+      <span>A</span>
+      <br />
+      <span>You picked: {{ picked }}</span>
+    </div>
+    <p>
+      > radioVBindVm.picked === radioVBindVm.a
+    </p>
+
+    <h2>select v-bind</h2>
+    <div id="select-v-bind">
+      <select v-model="selected">
+        <option v-bind:value="{ message: 'message' }">message</option>
+      </select>
+      <p>You selected: {{ selected }}</p>
+    </div>
+    <p>
+      > typeof selectVBind.selected<br />
+      > selectVBind.selected.message
+    </p>
+
+    <h2>number</h2>
+    <div id="number">
+      <input v-model.number="number" placeholder="Type number!" />
+    </div>
+    <p>
+      > Type abc then typeof numberVm.number<br />
+      > Type 123 then typeof numberVm.number
+    </p>
+
+    <h2>trim</h2>
+    <div id="trim">
+      <input v-model.trim="message" placeholder="Edit me with white spaces!" />
+      <p>Message is: {{ message }}</p>
+    </div>
+    <p>
+      > trimVm.message
+    </p>
+
+    <script>
+      var vModelVm = new Vue({
+          el: '#v-model',
+          data: {
+              message: ''
+          }
+      })
+
+      var textareaVm = new Vue({
+          el: '#textarea',
+          data: {
+              message: ''
+          }
+      })
+
+      var checkboxVm = new Vue({
+          el: '#checkbox',
+          data: {
+              checked: false
+          }
+      })
+
+      var multipleCheckboxVm = new Vue({
+          el: '#multiple-checkbox',
+          data: {
+              checkedNames: []
+          }
+      })
+
+      var radioVm = new Vue({
+          el: '#radio',
+          data: {
+              picked: ''
+          }
+      })
+
+      var selectVm = new Vue({
+          el: '#select',
+          data: {
+              selected: ''
+          }
+      })
+
+      var selectMultipleVm = new Vue({
+          el: '#select-multiple',
+          data: {
+              selected: []
+          }
+      })
+
+      var selectVForVm = new Vue({
+          el: '#select-v-for',
+          data: {
+              selected: '',
+              options: [
+                  { text: 'one', value: 'A'},
+                  { text: 'two', value: 'B'},
+                  { text: 'three', value: 'C'}
+              ]
+          }
+      })
+
+      var checkboxVBindVm = new Vue({
+          el: '#checkbox-v-bind',
+          data: {
+              a: 'A',
+              b: 'B',
+              toggle: 'B'
+          }
+      })
+
+      var radioVBindVm = new Vue({
+          el: '#radio-v-bind',
+          data: {
+              a: 'A',
+              b: 'B',
+              picked: ''
+          }
+      })
+
+      var selectVBind = new Vue({
+          el: '#select-v-bind',
+          data: {
+              selected: ''
+          }
+      })
+
+      var numberVm = new Vue({
+          el: '#number',
+          data: {
+              number: ''
+          }
+      })
+
+      var trimVm = new Vue({
+          el: '#trim',
+          data: {
+              message: ''
+          }
+      })
+    </script>
+  </body>
+</html>
