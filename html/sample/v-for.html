@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
 
@@ -14,13 +14,21 @@
 
     <h2>v-for</h2>
     <ul id="v-for">
-      <li v-for="item in items">
+      <li v-for="item in items" v-bind:key="item.id">
         {{ item.message }}
       </li>
     </ul>
     <p>
       > vForVm.items.pop()<br />
-      > vForVm.items.push({ message: 'baz' })
+      > vForVm.items.push({ message: 'Baz', id: 3 })<br />
+      <br />
+      // Valid operation<br />
+      > Vue.set(vForVm.items, 0, { message: 'Hoge', id: 4 })<br />
+      > vForVm.items.splice(1, 1, { message: 'Fuga', id: 5 })<br />
+      <br />
+      // Invalid operation<br />
+      > vForVm.items[0].message<br />
+      > vForVm.items[0] = { message: 'Piyo', id: 6}
     </p>
 
     <h2>index</h2>
@@ -31,7 +39,7 @@
     </ul>
     <p>
       > indexVm.items.pop()<br />
-      > indexVm.items.push({ message: 'baz' })
+      > indexVm.items.push({ message: 'Baz', id: 3 })
     </p>
 
     <h2>template</h2>
@@ -43,7 +51,7 @@
     </ul>
     <p>
       > templateVm.items.pop()
-      > templateVm.items.push({ message: 'Baz'} )
+      > templateVm.items.push({ message: 'Baz', id: 3 } )
     </p>
 
     <h2>object</h2>
@@ -64,13 +72,34 @@
       > rangeVm.range = 10
     </p>
 
+    <h2>v-if + v-for</h2>
+    <ul id="v-if-v-for">
+      <li v-for="todo in todos" v-if="!todo.isCompleted" v-bind:key="todo.id">
+        {{ todo.message }}
+      </li>
+    </ul>
+    <p>
+      > vIfVForVm.todos[0].isCompleted = true
+    </p>
+
+    <h2>filter / sort etc...</h2>
+    <ul id="filter-sort-etc">
+      <li v-for="n in oddNumbers">
+        {{ n }}
+      </li>
+    </ul>
+    <p>
+      > filterSortEtcVm.numbers.push(6)<br />
+      > filterSortEtcVm.numbers.push(7)
+    </p>
+
     <script>
       var vForVm = new Vue({
           el: '#v-for',
           data: {
               items: [
-                  { message: 'Foo' },
-                  { message: 'Bar' }
+                  { message: 'Foo', id: 1 },
+                  { message: 'Bar', id: 2 }
               ]
           }
       })
@@ -79,8 +108,8 @@
           el: '#index',
           data: {
               items: [
-                  { message: 'Foo' },
-                  { message: 'Bar' }
+                  { message: 'Foo', id: 1 },
+                  { message: 'Bar', id: 2 }
               ]
           }
       })
@@ -89,8 +118,8 @@
           el: '#template',
           data: {
               items: [
-                  { message: 'Foo'},
-                  { message: 'Bar'}
+                  { message: 'Foo', id: 1},
+                  { message: 'Bar', id: 2}
               ]
           }
       })
@@ -109,6 +138,31 @@
           el: '#range',
           data: {
               range: 15
+          }
+      })
+
+      var vIfVForVm = new Vue({
+          el: '#v-if-v-for',
+          data: {
+              todos: [
+                  { message: 'foo', isCompleted: false, id: 1 },
+                  { message: 'bar', isCompleted: false, id: 2 },
+                  { message: 'baz', isCompleted: false, id: 3 }
+              ]
+          }
+      })
+
+      var filterSortEtcVm = new Vue({
+          el: '#filter-sort-etc',
+          data: {
+              numbers: [ 1, 2, 3, 4, 5 ]
+          },
+          computed: {
+              oddNumbers: function () {
+                  return this.numbers.filter(function (number) {
+                      return number % 2 === 1
+                  })
+              }
           }
       })
     </script>
