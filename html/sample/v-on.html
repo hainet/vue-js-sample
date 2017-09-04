@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>v-on</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>v-on</h1>
+
+    <h2>v-on</h2>
+    <div id="v-on">
+      <button v-on:click="counter += 1">Click me!</button>
+      <p>You clicked {{ counter }} times!</p>
+    </div>
+    <p>
+      > vOnVm.counter
+    </p>
+
+    <h2>method</h2>
+    <div id="method">
+      <button v-on:click="greet">Nice to meet you!</button>
+    </div>
+    <p>
+      > methodVm.name = 'updated'
+    </p>
+
+    <h2>inline method</h2>
+    <div id="inline-method">
+      <button v-on:click="greet(message)">Show message</button>
+    </div>
+    <p>
+      > inlineMethodVm.message = 'updated'
+    </p>
+
+    <h2>keyboard event</h2>
+    <div id="keyboard-event">
+      <input
+          v-on:keyup.up="up"
+          v-on:keyup.ctrl.65="ctrlA"
+          v-on:click.ctrl="ctrlClick" />
+    </div>
+    <p>
+      1. Click text box<br />
+      2. Type Up<br />
+      3. Type ctrl + A<br />
+      4. Type ctrl then click
+    </p>
+
+    <script>
+      var vOnVm = new Vue({
+          el: '#v-on',
+          data: {
+              counter: 0
+          }
+      })
+
+      var methodVm = new Vue({
+          el: '#method',
+          data: {
+              name: 'hainet'
+          },
+          methods: {
+              greet: function () {
+                  alert(`Hello ${this.name}!`)
+              }
+          }
+      })
+
+      var inlineMethodVm = new Vue({
+          el: '#inline-method',
+          data: {
+              message: 'message'
+          },
+          methods: {
+              greet: function(message) {
+                  alert(message)
+              }
+          }
+      })
+
+      var keyboardEventVm = new Vue({
+          el: '#keyboard-event',
+          methods: {
+              up: function() {
+                  alert('You typed up key!')
+              },
+              ctrlA: function() {
+                  alert('You type ctrl + A!')
+              },
+              ctrlClick: function() {
+                  alert('You typed ctrl key then clicked!')
+              },
+              ctrlRightClick: function() {
+                  alert('You typed ctrl key then right clicked!')
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
