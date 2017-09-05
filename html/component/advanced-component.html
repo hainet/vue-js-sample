@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Advanced component</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Advanced component</h1>
+
+    <h2>Return function</h2>
+    <div id="return-function">
+      <counter></counter>
+      <counter></counter>
+      <counter></counter>
+    </div>
+
+    <h2>Property validation</h2>
+    <div id="property-validation">
+      <property-validation
+          v-bind:number-value="number"
+          v-bind:string-value="string"
+          v-bind:required-value="required"
+          v-bind:custom="custom">
+      </property-validation>
+    </div>
+    <p>
+      > propertyValidationVm.number = 'String value'<br />
+      > propertyValidationVm.string = 100<br />
+      > propertyValidationVm.required = null<br />
+      > propertyValidationVm.custom = 1
+    </p>
+
+    <h2>Custom event</h2>
+    <div id="custom-event">
+      <p>{{ total }}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+
+    <h2>Recursive component</h2>
+    <div id="recursive-component">
+      <recursive-component v-bind:offset="offset" v-bind:limit="limit"></recursive-component>
+    </div>
+    <p>
+      > recursiveComponentVm.offset = 11<br />
+      > recursiveComponentVm.limit = 10
+    </p>
+
+    <script>
+      Vue.component('counter', {
+          template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+          data: function () {
+              return {
+                  counter: 0
+              }
+          }
+      })
+
+      var returnFunctionVm = new Vue({
+          el: '#return-function'
+      })
+
+      Vue.component('property-validation', {
+          props: {
+              numberValue: Number,
+              stringValue: String,
+              requiredValue: {
+                  type: String,
+                  required: true
+              },
+              defaultValue: {
+                  type: Number,
+                  default: 100
+              },
+              defaultObject: {
+                  type: Object,
+                  default: function () {
+                      return { message: 'Default message' }
+                  }
+              },
+              custom: {
+                  validator: function (value) {
+                      return value > 10
+                  }
+              }
+          },
+          template: '\
+          <div>\
+            number: {{ numberValue }}<br />\
+            string: {{ stringValue }}<br />\
+            required: {{ requiredValue }}<br />\
+            defaultValue: {{ defaultValue }}<br />\
+            defaultObject: {{ defaultObject }}<br />\
+            custom: {{ custom }}\
+          </div>\
+        '
+      })
+
+      var propertyValidationVm = new Vue({
+          el: '#property-validation',
+          data: {
+              number: 100,
+              string: 'String value',
+              required: 'Required value',
+              custom: 100
+          }
+      })
+
+      Vue.component('button-counter', {
+          template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+          data: function () {
+              return {
+                  counter: 0
+              }
+          },
+          methods: {
+              incrementCounter: function () {
+                  this.counter += 1
+                  this.$emit('increment')
+              }
+          }
+      })
+
+      var customEventVm = new Vue({
+          el: '#custom-event',
+          data: {
+              total: 0
+          },
+          methods: {
+              incrementTotal: function () {
+                  this.total += 1
+              }
+          }
+      })
+
+      Vue.component('recursive-component', {
+          props: {
+              counter: {
+                  type: Number,
+                  default: 1
+              },
+              offset: {
+                  type: Number,
+                  required: true
+              },
+              limit: {
+                  type: Number,
+                  required: true
+              }
+          },
+          template: '\
+          <span>\
+            Re:{{ offset }}\
+            <recursive-component\
+                v-bind:counter="counter + 1"\
+                v-bind:offset="offset + 1"\
+                v-bind:limit="limit"\
+                v-if="seen">\
+            </recursive-component>\
+          </span>\
+        ',
+          computed: {
+              seen: function () {
+                  return this.counter < this.limit
+              }
+          }
+      })
+
+      var recursiveComponentVm = new Vue({
+          el: '#recursive-component',
+          data: {
+              offset: 1,
+              limit: 5
+          }
+      })
+    </script>
+  </body>
+</html>
