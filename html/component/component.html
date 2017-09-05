@@ -77,25 +77,7 @@
       <button-counter v-on:increment="incrementTotal"></button-counter>
     </div>
 
-    <h2>Single slot</h2>
-    <div id="single-slot">
-      <child-component>
-        <p>This is some parent content!</p>
-        <p>This is some more parent content!</p>
-      </child-component>
-    </div>
 
-    <h2>Named slot</h2>
-    <div id="named-slot">
-      <container>
-        <h3 slot="header">This is header!</h3>
-
-        <p>This is some parent content!</p>
-        <p>This is some more parent content!</p>
-
-        <p slot="footer">This is footer!</p>
-      </container>
-    </div>
 
     <h2>Recursive component</h2>
     <div id="recursive-component">
@@ -242,41 +224,6 @@
                   this.total += 1
               }
           }
-      })
-
-      Vue.component('child-component', {
-          template: '\
-            <div>\
-              <h2>I\'m the child title</h2>\
-              <slot>\
-                This will only be displayed if there is no content to be distributed!\
-              </slot>\
-            </div>\
-          '
-      })
-
-      var singleSlotVm = new Vue({
-          el: '#single-slot'
-      })
-
-      Vue.component('container', {
-          template: '\
-            <div>\
-              <div>\
-                <slot name="header"></slot>\
-              </div>\
-              <div>\
-                <slot></slot>\
-              </div>\
-              <div>\
-                <slot name="footer"></slot>\
-              </div>\
-            </div>\
-          '
-      })
-
-      var namedSlotVm = new Vue({
-          el: '#named-slot'
       })
 
       Vue.component('recursive-component', {
