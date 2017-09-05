@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Mixin</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Mixin</h1>
+
+    <h2>Mixin</h2>
+    <div id="mixin">
+      <mixin v-bind:message="message"></mixin>
+    </div>
+    <p>
+      > mixinVm.message = 'updated'
+    </p>
+
+    <h2>Merge</h2>
+    <div id="merge">
+      <merge v-bind:message="message"></merge>
+    </div>
+    <p>
+      > mergeVm.message = 'updated'
+    </p>
+
+    <h2>Conflict</h2>
+    <p>
+      > conflictVm.conflict()<br />
+      > conflictVm.foo()<br />
+      > conflictVm.bar()
+    </p>
+
+    <h2>Global mixin</h2>
+    <p>
+      > mixinVm.global()<br />
+      > mergeVm.global()<br />
+      > conflictVm.global()
+    </p>
+
+    <script>
+      Vue.mixin({
+          methods: {
+              global: function () {
+                  console.log('Global mixin!')
+              }
+          }
+      })
+
+      var mixin = {
+          props: {
+              message: String
+          },
+          template: '<div>{{ message }}</div>',
+          updated: function () {
+              console.log('Component updated!')
+          }
+      }
+
+      var mixinVm = new Vue({
+          mixins: [mixin],
+          el: '#mixin',
+          data: {
+              message: 'message'
+          }
+      })
+
+      var merge = {
+          props: {
+              message: String
+          },
+          template: '<div>{{ message }}</div>',
+          updated: function () {
+              console.log('Mixin hook called!')
+          }
+      }
+
+      var mergeVm = new Vue({
+          mixins: [merge],
+          el: '#merge',
+          data: {
+              message: 'message'
+          },
+          updated: function () {
+              console.log('Component hook called!')
+          }
+      })
+
+      var conflict = {
+          methods: {
+              foo: function () {
+                  console.log('foo')
+              },
+              conflict: function () {
+                  console.log('conflict from mixin!')
+              }
+          }
+      }
+
+      var conflictVm = new Vue({
+          mixins: [conflict],
+          methods: {
+              bar: function () {
+                  console.log('bar')
+              },
+              conflict: function () {
+                  console.log('conflict from vm!')
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
