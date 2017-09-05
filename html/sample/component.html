@@ -33,6 +33,79 @@
       > nestedComponentVm.message = 'updated'
     </p>
 
+    <h2>Local component</h2>
+    <div id="local-component">
+      <local-component></local-component>
+    </div>
+
+    <h2>is</h2>
+    <div id="is">
+      <table>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+      </table>
+    </div>
+
+    <h2>Return function</h2>
+    <div id="return-function">
+      <counter></counter>
+      <counter></counter>
+      <counter></counter>
+    </div>
+
+    <h2>Property validation</h2>
+    <div id="property-validation">
+      <property-validation
+          v-bind:number-value="number"
+          v-bind:string-value="string"
+          v-bind:required-value="required"
+          v-bind:custom="custom">
+      </property-validation>
+    </div>
+    <p>
+      > propertyValidationVm.number = 'String value'<br />
+      > propertyValidationVm.string = 100<br />
+      > propertyValidationVm.required = null<br />
+      > propertyValidationVm.custom = 1
+    </p>
+
+    <h2>Custom event</h2>
+    <div id="custom-event">
+      <p>{{ total }}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+
+    <h2>Single slot</h2>
+    <div id="single-slot">
+      <child-component>
+        <p>This is some parent content!</p>
+        <p>This is some more parent content!</p>
+      </child-component>
+    </div>
+
+    <h2>Named slot</h2>
+    <div id="named-slot">
+      <container>
+        <h3 slot="header">This is header!</h3>
+
+        <p>This is some parent content!</p>
+        <p>This is some more parent content!</p>
+
+        <p slot="footer">This is footer!</p>
+      </container>
+    </div>
+
+    <h2>Recursive component</h2>
+    <div id="recursive-component">
+      <recursive-component v-bind:offset="offset" v-bind:limit="limit"></recursive-component>
+    </div>
+    <p>
+      > recursiveComponentVm.offset = 11<br />
+      > recursiveComponentVm.limit = 10
+    </p>
+
     <script>
       Vue.component('component', {
           template: '<div>A custom component!</div>'
@@ -63,6 +136,187 @@
           el: '#nested-component',
           data: {
               message: 'A nested component!'
+          }
+      })
+
+      var LocalComponent = {
+          template: '<div>A local component!</div>'
+      }
+
+      var localComponentVm = new Vue({
+          el: '#local-component',
+          components: {
+              'local-component': LocalComponent
+          }
+      })
+
+      Vue.component('row', {
+          template: '<tr>component row</tr>'
+      })
+
+      var isVm = new Vue({
+          el: '#is'
+      })
+
+      Vue.component('counter', {
+          template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+          data: function () {
+              return {
+                  counter: 0
+              }
+          }
+      })
+
+      var returnFunctionVm = new Vue({
+          el: '#return-function'
+      })
+
+      Vue.component('property-validation', {
+          props: {
+              numberValue: Number,
+              stringValue: String,
+              requiredValue: {
+                  type: String,
+                  required: true
+              },
+              defaultValue: {
+                  type: Number,
+                  default: 100
+              },
+              defaultObject: {
+                  type: Object,
+                  default: function () {
+                      return { message: 'Default message' }
+                  }
+               },
+              custom: {
+                  validator: function (value) {
+                      return value > 10
+                  }
+              }
+          },
+          template: '\
+            <div>\
+              number: {{ numberValue }}<br />\
+              string: {{ stringValue }}<br />\
+              required: {{ requiredValue }}<br />\
+              defaultValue: {{ defaultValue }}<br />\
+              defaultObject: {{ defaultObject }}<br />\
+              custom: {{ custom }}\
+            </div>\
+          '
+      })
+
+      var propertyValidationVm = new Vue({
+          el: '#property-validation',
+          data: {
+              number: 100,
+              string: 'String value',
+              required: 'Required value',
+              custom: 100
+          }
+      })
+
+      Vue.component('button-counter', {
+          template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+          data: function () {
+              return {
+                  counter: 0
+              }
+          },
+          methods: {
+              incrementCounter: function () {
+                  this.counter += 1
+                  this.$emit('increment')
+              }
+          }
+      })
+
+      var customEventVm = new Vue({
+          el: '#custom-event',
+          data: {
+              total: 0
+          },
+          methods: {
+              incrementTotal: function () {
+                  this.total += 1
+              }
+          }
+      })
+
+      Vue.component('child-component', {
+          template: '\
+            <div>\
+              <h2>I\'m the child title</h2>\
+              <slot>\
+                This will only be displayed if there is no content to be distributed!\
+              </slot>\
+            </div>\
+          '
+      })
+
+      var singleSlotVm = new Vue({
+          el: '#single-slot'
+      })
+
+      Vue.component('container', {
+          template: '\
+            <div>\
+              <div>\
+                <slot name="header"></slot>\
+              </div>\
+              <div>\
+                <slot></slot>\
+              </div>\
+              <div>\
+                <slot name="footer"></slot>\
+              </div>\
+            </div>\
+          '
+      })
+
+      var namedSlotVm = new Vue({
+          el: '#named-slot'
+      })
+
+      Vue.component('recursive-component', {
+          props: {
+              counter: {
+                  type: Number,
+                  default: 1
+              },
+              offset: {
+                  type: Number,
+                  required: true
+              },
+              limit: {
+                  type: Number,
+                  required: true
+              }
+          },
+          template: '\
+            <span>\
+              Re:{{ offset }}\
+              <recursive-component\
+                  v-bind:counter="counter + 1"\
+                  v-bind:offset="offset + 1"\
+                  v-bind:limit="limit"\
+                  v-if="seen">\
+              </recursive-component>\
+            </span>\
+          ',
+          computed: {
+              seen: function () {
+                  return this.counter < this.limit
+              }
+          }
+      })
+
+      var recursiveComponentVm = new Vue({
+          el: '#recursive-component',
+          data: {
+              offset: 1,
+              limit: 5
           }
       })
     </script>
