@@ -48,28 +48,28 @@
       > objectValue.object = { dummy: 'updated', message: 'updated' }
     </p>
 
-    <h2>component</h2>
-    <div id="component">
-      <component></component>
-    </div>
+    <script>
+      var value = new Vue({
+          el: '#value',
+          data: {
+              message: 'Hello Vue!'
+          }
+      })
 
-    <h2>v-bind-component</h2>
-    <div id="v-bind-component">
-      <v-bind-component v-bind:item="'Bound message'"></v-bind-component>
-    </div>
+      var values = new Vue({
+          el: '#values',
+          data: {
+              message1: 'message1',
+              message2: 'message2'
+          }
+      })
 
-    <h2>vuejs-v-bind-component</h2>
-    <div id="vuejs-v-bind-component">
-      <v-bind-component v-bind:item="message"></v-bind-component>
-    </div>
-    <p>> vuejsVBindComponent.message = 'updated'</p>
-
-    <h2>nested component </h2>
-    <div id="nested-component">
-      <nested-component v-bind:item="message"></nested-component>
-    </div>
-    <p>> nestedComponent.message = 'updated'</p>
+      var objectValue = new Vue({
+          el: '#object-value',
+          data: {
+              object: { message: 'message' }
+          }
+      })
+    </script>
   </body>
-
-  <script src="../../js/sample/hello-vuejs.js"></script>
 </html>

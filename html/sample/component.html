@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>component</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>component</h1>
+
+    <h2>component</h2>
+    <div id="component">
+      <component></component>
+    </div>
+
+    <h2>v-bind component</h2>
+    <div id="v-bind-component">
+      <v-bind-component v-bind:item="message"></v-bind-component>
+    </div>
+    <p>
+      > vBindComponentVm.message = 'updated'
+    </p>
+
+    <h2>Nested component</h2>
+    <div id="nested-component">
+      <nested-component v-bind:item="message"></nested-component>
+    </div>
+    <p>
+      > nestedComponentVm.message = 'updated'
+    </p>
+
+    <script>
+      Vue.component('component', {
+          template: '<div>A custom component!</div>'
+      })
+
+      var componentVm = new Vue({
+          el: '#component'
+      })
+
+      Vue.component('v-bind-component', {
+          props: ['item'],
+          template: '<div>{{ item }}</div>'
+      })
+
+      var vBindComponentVm = new Vue({
+          el: '#v-bind-component',
+          data: {
+              message: 'A bound component!'
+          }
+      })
+
+      Vue.component('nested-component', {
+          props: ['item'],
+          template: '<v-bind-component v-bind:item="item"></v-bind-component>'
+      })
+
+      var nestedComponentVm = new Vue({
+          el: '#nested-component',
+          data: {
+              message: 'A nested component!'
+          }
+      })
+    </script>
+  </body>
+</html>
