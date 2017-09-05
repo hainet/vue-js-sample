@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:v-hook="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>custom-directive</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Custom directive</h1>
+
+    <h2>Custom directive</h2>
+    <div id="custom-directive">
+      <input placeholder="Now you focus me!" v-focus />
+    </div>
+
+    <h2>Hook</h2>
+    <div id="hook">
+      <div v-hook:arg.modifier="message"></div>
+    </div>
+
+    <script>
+      Vue.directive('focus', {
+          inserted: function (el) {
+              el.focus()
+          }
+      })
+
+      var customDirectiveVm = new Vue({
+          el: '#custom-directive'
+      })
+
+      var hookVm = new Vue({
+          el: '#hook',
+          data: {
+              message: {
+                  foo: 'foo',
+                  bar: 'bar'
+              }
+          },
+          directives: {
+              hook: {
+                  bind: function(el, binding, vnode) {
+                      el.innerHTML = `\
+                          name: ${binding.name} <br />\
+                          value: ${binding.value}<br />\
+                          value.foo: ${binding.value.foo}<br />\
+                          value.bar: ${binding.value.bar}<br />\
+                          expression: ${binding.expression}<br />\
+                          argument: ${binding.arg}<br />\
+                          modifiers: ${binding.modifiers.modifier}<br />\
+                          vnode keys: ${Object.keys(vnode).join(', ')}
+                      `
+                  }
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
