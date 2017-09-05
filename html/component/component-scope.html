@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Component scope</title>
+    <meta name="author" content="hainet" />
+
+    <script src="../../js/vue/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Component scope</h1>
+
+    <div id="vm">
+      <h2>Global component</h2>
+      <global-component></global-component>
+
+      <h2>Local component</h2>
+      <local-component></local-component>
+    </div>
+
+    <script>
+      Vue.component('global-component', {
+          template: '<div>Global component</div>'
+      })
+
+      var LocalComponent = Vue.extend({
+          template: '<div>Local component</div>'
+      })
+
+      var vm = new Vue({
+          el: '#vm',
+          components: {
+              'local-component': LocalComponent
+          }
+      })
+    </script>
+  </body>
+</html>
