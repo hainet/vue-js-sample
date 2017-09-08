@@ -18,6 +18,9 @@
 
       <h2>Local component</h2>
       <local-component></local-component>
+
+      <h2>Component object</h2>
+      <component-object></component-object>
     </div>
 
     <script>
@@ -25,14 +28,17 @@
           template: '<div>Global component</div>'
       })
 
-      var LocalComponent = Vue.extend({
-          template: '<div>Local component</div>'
+      var ComponentObject = Vue.extend({
+          template: '<div>Component object</div>'
       })
 
       var vm = new Vue({
           el: '#vm',
           components: {
-              'local-component': LocalComponent
+              'local-component': {
+                  template: '<div>Local component</div>'
+              },
+              'component-object': ComponentObject
           }
       })
     </script>
