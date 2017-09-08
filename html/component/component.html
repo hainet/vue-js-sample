@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>component</title>
+    <title>Component</title>
     <meta name="author" content="hainet" />
 
     <script src="../../js/vue/vue.js"></script>
   </head>
 
   <body>
-    <h1>component</h1>
+    <h1>Component</h1>
 
-    <h2>component</h2>
+    <h2>Component</h2>
     <div id="component">
       <component></component>
     </div>
@@ -37,6 +37,17 @@
     <div id="local-component">
       <local-component></local-component>
     </div>
+
+    <h2>Dynamic component</h2>
+    <div id="dynamic-component">
+      <keep-alive> <!-- 非活性になったコンポーネントをキャッシュ -->
+        <component v-bind:is="currentComponent"></component>
+      </keep-alive>
+    </div>
+    <p>
+      > dynamicComponent.currentComponent = 'bar-component'<br />
+      > dynamicComponent.currentComponent = 'baz-component'
+    </p>
 
     <h2>is</h2>
     <div id="is">
@@ -97,6 +108,24 @@
 
       var isVm = new Vue({
           el: '#is'
+      })
+
+      var dynamicComponent = new Vue({
+          el: '#dynamic-component',
+          data: {
+              currentComponent: 'foo-component'
+          },
+          components: {
+              'foo-component': {
+                  template: '<div>Foo component!</div>'
+              },
+              'bar-component': {
+                  template: '<div>Bar component!</div>'
+              },
+              'baz-component': {
+                  template: '<div>Baz component!</div>'
+              }
+          }
       })
     </script>
   </body>
