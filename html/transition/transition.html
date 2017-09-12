@@ -65,37 +65,29 @@
           methods: {
               beforeEnter: function (el) {
                   console.log('Before enter')
-                  console.log(el)
               },
               enter: function (el, done) {
                   console.log('Enter')
-                  console.log(el)
                   done()
               },
               afterEnter: function (el) {
                   console.log('After enter')
-                  console.log(el)
               },
               enterCancelled: function (el) {
                   console.log('Enter canceled')
-                  console.log(el)
               },
               beforeLeave: function (el) {
                   console.log('Before leave')
-                  console.log(el)
               },
               leave: function (el, done) {
                   console.log('Leave')
-                  console.log(el)
                   done()
               },
               afterLeave: function (el) {
                   console.log('After leave')
-                  console.log(el)
               },
               leaveCancelled: function (el) {
                   console.log('Leave canceled')
-                  console.log(el)
               }
           }
       })
