@@ -45,8 +45,8 @@
       </keep-alive>
     </div>
     <p>
-      > dynamicComponent.currentComponent = 'bar-component'<br />
-      > dynamicComponent.currentComponent = 'baz-component'
+      > dynamicComponentVm.currentComponent = 'bar-component'<br />
+      > dynamicComponentVm.currentComponent = 'baz-component'
     </p>
 
     <h2>is</h2>
@@ -110,7 +110,7 @@
           el: '#is'
       })
 
-      var dynamicComponent = new Vue({
+      var dynamicComponentVm = new Vue({
           el: '#dynamic-component',
           data: {
               currentComponent: 'foo-component'

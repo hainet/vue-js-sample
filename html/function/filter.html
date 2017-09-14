@@ -17,7 +17,8 @@
       {{ message | capitalize }}
     </div>
     <p>
-      > mustache.message = 'updated'
+      > mustacheVm.message<br />
+      > mustacheVm.message = 'updated'
     </p>
 
     <h2>filter chain</h2>
@@ -27,11 +28,12 @@
       {{ message | filterA | filterB }}
     </div>
     <p>
-      > filterChain.message = 'updated'
+      > filterChainVm.message<br />
+      > filterChainVm.message = 'updated'
     </p>
 
     <script>
-      var mustache = new Vue({
+      var mustacheVm = new Vue({
           el: '#mustache',
           data: { message: 'musatche' },
           filters: {
@@ -42,7 +44,7 @@
           }
       })
 
-      var filterChain = new Vue({
+      var filterChainVm = new Vue({
           el: '#filter-chain',
           data: { message: 'filter-chain'},
           filters: {

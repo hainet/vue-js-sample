@@ -23,7 +23,8 @@
       {{ message }}
     </div>
     <p>
-      > value.message = 'updated'
+      > valueVm.message<br />
+      > valueVm.message = 'updated'
     </p>
 
     <h2>values</h2>
@@ -32,8 +33,10 @@
       <li>{{ message2 }}</li>
     </ul>
     <p>
-      > values.message1 = 'updated1'<br />
-      > values.message2 = 'updated2'
+      > valuesVm.message1<br />
+      > valuesVm.message2<br />
+      > valuesVm.message1 = 'updated1'<br />
+      > valuesVm.message2 = 'updated2'
     </p>
 
     <h2>object value</h2>
@@ -42,21 +45,22 @@
       <div>object.message: {{ object.message }}</div>
     </div>
     <p>
-      > objectValue.object.message = 'updated'<br />
-      > objectValue.object = { message: 'updated' }<br />
-      > objectValue.object = { dummy: 'updated' }<br />
-      > objectValue.object = { dummy: 'updated', message: 'updated' }
+      > objectValueVm.object.message<br />
+      > objectValueVm.object.message = 'updated'<br />
+      > objectValueVm.object = { message: 'updated' }<br />
+      > objectValueVm.object = { dummy: 'updated' }<br />
+      > objectValueVm.object = { dummy: 'updated', message: 'updated' }
     </p>
 
     <script>
-      var value = new Vue({
+      var valueVm = new Vue({
           el: '#value',
           data: {
               message: 'Hello Vue!'
           }
       })
 
-      var values = new Vue({
+      var valuesVm = new Vue({
           el: '#values',
           data: {
               message1: 'message1',
@@ -64,7 +68,7 @@
           }
       })
 
-      var objectValue = new Vue({
+      var objectValueVm = new Vue({
           el: '#object-value',
           data: {
               object: { message: 'message' }

@@ -13,6 +13,16 @@
   <body>
     <h1>Directive</h1>
 
+    <div id="v-once">
+      <h2>v-once</h2>
+      <span v-once>
+        This {{ message }} will never change!
+      </span>
+    </div>
+    <p>
+      > vOnceVm.message = 'update'
+    </p>
+
     <div id="v-bind-id">
       <h2>v-bind:id</h2>
       <span v-bind:id="id">
@@ -20,7 +30,7 @@
       </span>
     </div>
     <p>
-      > vBindId.id = '2'<br />
+      > vBindIdVm.id = '2'<br />
       > document.getElementById('2')
     </p>
 
@@ -31,7 +41,7 @@
       </span>
     </div>
     <p>
-      > vBindTitle.message = new Date()
+      > vBindTitleVm.message = new Date()
     </p>
 
     <div id="v-bind-href">
@@ -39,7 +49,7 @@
       <a v-bind:href="url" target="_blank">Vue.js</a>
     </div>
     <p>
-      > vBindHref.url = 'https://github.com/vuejs/vue'
+      > vBindHrefVm.url = 'https://github.com/vuejs/vue'
     </p>
 
     <div id="v-bind-disabled">
@@ -47,17 +57,7 @@
       <input v-bind:disabled="disabled" />
     </div>
     <p>
-      > vBindDisabled.disabled = true
-    </p>
-
-    <div id="v-once">
-      <h2>v-once</h2>
-      <span v-once>
-        This {{ message }} will never change!
-      </span>
-    </div>
-    <p>
-      > vOnce.message = 'update'
+      > vBindDisabledVm.disabled = true
     </p>
 
     <div id="v-if">
@@ -65,7 +65,7 @@
       <span v-if="seen">Now you see me!</span>
     </div>
     <p>
-      > vIf.seen = false
+      > vIfVm.seen = false
     </p>
 
     <div id="v-for">
@@ -77,8 +77,8 @@
       </ol>
     </div>
     <p>
-      > vFor.skills.push({ name: 'MVVM' })<br />
-      > vFor.skills.pop()
+      > vForVm.skills.push({ name: 'MVVM' })<br />
+      > vForVm.skills.pop()
     </p>
 
     <div id="v-on">
@@ -87,7 +87,7 @@
       <button v-on:click.prevent="reverseMessage">Reverse Message</button>
     </div>
     <p>
-      > vOn.message = 'updated'
+      > vOnVm.message = 'updated'
     </p>
 
     <div id="v-model">
@@ -95,7 +95,7 @@
       {{ message }}
       <input v-model:value="message" />
     </div>
-    <p>> vModel.message = 'updated'</p>
+    <p>> vModelVm.message = 'updated'</p>
 
     <div id="v-html">
       <h2>v-html</h2>
@@ -103,49 +103,49 @@
     </div>
 
     <script>
-      var vOnce = new Vue({
+      var vOnceVm = new Vue({
           el: '#v-once',
           data: {
               message: 'message'
           }
       })
 
-      var vBindId = new Vue({
+      var vBindIdVm = new Vue({
           el: '#v-bind-id',
           data: {
               id: '1'
           }
       })
 
-      var vBindTitle = new Vue({
+      var vBindTitleVm = new Vue({
           el: '#v-bind-title',
           data: {
               message: new Date()
           }
       })
 
-      var vBindHref = new Vue({
+      var vBindHrefVm = new Vue({
           el: '#v-bind-href',
           data: {
               url: 'https://jp.vuejs.org'
           }
       })
 
-      var vBindDisabled = new Vue({
+      var vBindDisabledVm = new Vue({
           el: '#v-bind-disabled',
           data: {
               disabled: false
           }
       })
 
-      var vIf = new Vue({
+      var vIfVm = new Vue({
           el: '#v-if',
           data: {
               seen: true
           }
       })
 
-      var vFor = new Vue({
+      var vForVm = new Vue({
           el: '#v-for',
           data: {
               skills: [
@@ -155,7 +155,7 @@
           }
       })
 
-      var vOn = new Vue({
+      var vOnVm = new Vue({
           el: '#v-on',
           data: {
               message: '0123456789'
@@ -167,14 +167,14 @@
           }
       })
 
-      var vModel = new Vue({
+      var vModelVm = new Vue({
           el: '#v-model',
           data: {
               message: 'Edit me!'
           }
       })
 
-      var vHtml = new Vue({
+      var vHtmlVm = new Vue({
           el: '#v-html',
           data: {
               rawHtml: '<b>This is raw html!</b>'
