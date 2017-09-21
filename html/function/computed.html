@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8"/>
+  <head>
+    <meta charset="utf-8"/>
 
-  <title>Computed</title>
-  <meta name="author" content="hainet"/>
+    <title>Computed</title>
+    <meta name="author" content="hainet"/>
 
-  <script src="../../js/vue/vue.js"></script>
-</head>
+    <script src="../../js/vue/vue.js"></script>
+  </head>
 
-<body>
-<h1>Computed</h1>
+  <body>
+    <h1>Computed</h1>
 
-<div id="computed">
-  {{ toUpperCase }}
-</div>
-<p>
-  > vm.message<br />
-  > vm.toUpperCase()<br />
-  > vm.message = 'updated'<br />
-  > vm.toUpperCase()<br />
-</p>
-</body>
+    <div id="computed">
+      {{ product }}
+    </div>
+    <p>
+      > x<br />
+      > vm.xVm<br />
+      > vm.xVm = 3000<br />
+      > x = 1<br />
+      > vm.xVm = 2000
+    </p>
+  </body>
 
-<script>
-    var vm = new Vue({
-        el: '#computed',
-        data: { message: 'message' },
-        computed: {
-            toUpperCase: function () {
-                return this.message.toLocaleUpperCase()
-            }
-        }
-    })
-</script>
+  <script>
+      var x = 1000
+
+      var vm = new Vue({
+          el: '#computed',
+          data: {
+              xVm: 2000
+          },
+          computed: {
+              product: function () {
+                  return x * this.xVm
+              }
+          }
+      })
+  </script>
 </html>
