@@ -33,11 +33,6 @@
       > nestedComponentVm.message = 'updated'
     </p>
 
-    <h2>Local component</h2>
-    <div id="local-component">
-      <local-component></local-component>
-    </div>
-
     <h2>Dynamic component</h2>
     <div id="dynamic-component">
       <keep-alive> <!-- 非活性になったコンポーネントをキャッシュ -->
@@ -91,14 +86,22 @@
           }
       })
 
-      var LocalComponent = {
-          template: '<div>A local component!</div>'
-      }
+      Vue.component('foo-component', {
+          template: '<div>Foo component</div>'
+      })
 
-      var localComponentVm = new Vue({
-          el: '#local-component',
-          components: {
-              'local-component': LocalComponent
+      Vue.component('bar-component', {
+          template: '<div>bar component</div>'
+      })
+
+      Vue.component('baz-component', {
+          template: '<div>Baz component</div>'
+      })
+
+      var dynamicComponentVm = new Vue({
+          el: '#dynamic-component',
+          data: {
+              currentComponent: 'foo-component'
           }
       })
 
@@ -108,24 +111,6 @@
 
       var isVm = new Vue({
           el: '#is'
-      })
-
-      var dynamicComponentVm = new Vue({
-          el: '#dynamic-component',
-          data: {
-              currentComponent: 'foo-component'
-          },
-          components: {
-              'foo-component': {
-                  template: '<div>Foo component!</div>'
-              },
-              'bar-component': {
-                  template: '<div>Bar component!</div>'
-              },
-              'baz-component': {
-                  template: '<div>Baz component!</div>'
-              }
-          }
       })
     </script>
   </body>
