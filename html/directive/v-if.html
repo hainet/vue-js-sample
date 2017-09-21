@@ -69,7 +69,7 @@
         <input placeholder="姓" />
         <input placeholder="名" key="japanese-first-name" />
       </template>
-      <template v-else>
+      <template v-else-if="type == 'English'">
         <input placeholder="Last name" />
         <input placeholder="First name" key="english-first-name" />
       </template>
