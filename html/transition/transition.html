@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
 
@@ -31,6 +31,26 @@
       </transition>
     </div>
 
+    <h2>List Transition</h2>
+    <div id="list-transition">
+      <button v-on:click="rows[0].seen = !rows[0].seen">
+        foo
+      </button>
+      <button v-on:click="rows[1].seen = !rows[1].seen">
+        bar
+      </button>
+      <button v-on:click="rows[2].seen = !rows[2].seen">
+        baz
+      </button>
+      <table>
+        <tbody name="fade" is="transition-group">
+        <tr v-for="row in rows" v-bind:key="row.value" v-if="row.seen">
+          <td>{{ row.value }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>JavaScript Hook</h2>
     <div id="javascript-hook">
       <button v-on:click="show = !show">
@@ -54,6 +74,27 @@
           el: '#transition',
           data: {
               show: true
+          }
+      })
+
+      var listTransitionVm = new Vue({
+          el: '#list-transition',
+          data: {
+              show: true,
+              rows: [
+                  {
+                      value: 'foo',
+                      seen: true
+                  },
+                  {
+                      value: 'bar',
+                      seen: true
+                  },
+                  {
+                      value: 'baz',
+                      seen: true
+                  }
+              ]
           }
       })
 
