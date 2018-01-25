@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja-jp" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-model="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Table search</title>
+  <meta name="author" content="hainet" />
+
+  <!-- develop -->
+  <script src="../../js/vue/vue.js"></script>
+</head>
+
+<body>
+<h1>Table search</h1>
+
+<div id="table-search">
+  <input type="text" v-model="query" placeholder="Table search..." />
+  <table>
+    <thead>
+      <th>id</th>
+      <th>name</th>
+    </thead>
+    <tbody v-for="row in rows" v-show="seen(row)">
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+    </tbody>
+  </table>
+</div>
+
+<script>
+    var tableSearchVm = new Vue({
+        el: '#table-search',
+        data: {
+            query: '',
+            rows: [
+                {id: 1, name: 'hainet'},
+                {id: 2, name: 'Vue.js'}
+            ]
+        },
+        methods: {
+            seen: function (value) {
+                let row;
+                Object.keys(value).forEach(key => {
+                    row += (value[key] + ' ').toLowerCase();
+                });
+
+                const result = [];
+                this.query.toLowerCase().split(' ').forEach(it => {
+                    it.split('　').forEach(term => {
+                        result.push(row.includes(term));
+                    })
+                });
+
+                return result.every(r => {
+                    return r;
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
